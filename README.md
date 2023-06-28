@@ -1,1 +1,3 @@
 # VBA-challenge
+The source of the code is from assignments solved (curriculum content) provided in class and the help of TA Saad Khan. Saad Khan assisted me with reformatting my code at my tutoring session on Monday night. 
+In this project the data used from the alphabetic_ testing excel spreadsheet was formatted with VBA script to provide an overview of all the information given. New columns were created to present the information and very vividly formatted with color are the yearly changes in stocks; followed by percent change and the total stock volume. Attached are the screenshots from every sheet of the excel spreadsheet. I was able to format the spreadsheets using the code and the VBA script successfully formatted and went through every sheet.
