@@ -1,0 +1,103 @@
+Sub stock()
+Dim ws As Worksheet
+
+         
+         For Each ws In Worksheets
+
+  Dim tickername As String
+
+  
+  Dim Totalvolume As Double
+  Totalvolume = 0
+
+  
+  Dim Summary_Table_Row As Integer
+  Summary_Table_Row = 2
+  Dim OpenPriceRow As Integer
+  OpenPriceRow = 2
+  lastRow = ws.Cells(Rows.Count, "A").End(xlUp).Row
+  
+  ws.Cells(1, 9).Value = "ticker"
+  ws.Cells(1, 10).Value = "yearly change"
+  ws.Cells(1, 11).Value = "percent change"
+  ws.Cells(1, 12).Value = "total stock volume"
+  ws.Cells(1, 16).Value = "ticker"
+  ws.Cells(1, 17).Value = "Value"
+
+  
+  For i = 2 To lastRow
+
+  
+    If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
+
+     
+      tickername = ws.Cells(i, 1).Value
+
+      
+      Totalvolume = Totalvolume + ws.Cells(i, 7).Value
+      
+      closingPrice = ws.Cells(i, 6).Value
+      openingPrice = ws.Cells(OpenPriceRow, 3).Value
+      Change = closingPrice - openingPrice
+      percentChange = Change / openingPrice
+      
+      
+      
+
+      ws.Range("I" & Summary_Table_Row).Value = tickername
+      ws.Range("J" & Summary_Table_Row).Value = Change
+      
+      
+      If ws.Range("J" & Summary_Table_Row).Value > 0 Then
+      ws.Range("J" & Summary_Table_Row).Interior.ColorIndex = 4
+      
+      ElseIf ws.Range("J" & Summary_Table_Row).Value < 0 Then
+       ws.Range("J" & Summary_Table_Row).Interior.ColorIndex = 3
+      
+      
+      End If
+      
+      ws.Range("K" & Summary_Table_Row).Value = percentChange
+      ws.Range("K" & Summary_Table_Row).NumberFormat = "0.00%"
+
+      
+      ws.Range("L" & Summary_Table_Row).Value = Totalvolume
+
+      
+      Summary_Table_Row = Summary_Table_Row + 1
+      OpenPriceRow = i + 1
+      
+    
+      Totalvolume = 0
+      
+
+
+
+    Else
+
+    
+      Totalvolume = Totalvolume + ws.Cells(i, 7).Value
+
+    End If
+
+Totalvolume = Totalvolume + ws.Cells(i, 7).Value
+
+Next i
+
+
+    ws.Cells(1, 16).Value = "Ticker"
+    ws.Cells(1, 17).Value = "Value"
+    ws.Cells(2, 16).Value = maxIncreaseTicker
+    ws.Cells(3, 16).Value = maxDecreaseTicker
+    ws.Cells(4, 16).Value = maxVolumeTicker
+    ws.Cells(2, 17).Value = maxIncrease
+    ws.Cells(3, 17).Value = maxDecrease
+    ws.Cells(4, 17).Value = maxVolume
+    
+
+    
+    ws.Columns("I:Q").AutoFit
+    
+Next ws
+
+End Sub
